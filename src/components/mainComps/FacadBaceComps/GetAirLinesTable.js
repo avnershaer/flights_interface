@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AxiosPath } from "../../AxiosPath";
 import AirlinesTable from "../../tableComps/AirlinesTable";
+import AirlineDetails from "../../tableComps/AirlinetDetails";
 
 
 const GetAirLinesTable = () => {
@@ -24,8 +25,21 @@ const GetAirLinesTable = () => {
     return <div className="error">Error: {error.message}</div>;
   }
 
-  return <AirlinesTable airlines={airlines}  />;
-  }
+  return( 
+  <div>
+
+  {error ? (
+        <div className="error">{error}</div>
+      ) : airlines && Array.isArray(airlines) ? (
+        <AirlinesTable airlines={airlines} />
+      ) : airlines && typeof airlines === 'object' ? (
+        <AirlineDetails apiResponse={airlines} />
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
+  );
+}
   
 export default GetAirLinesTable;
 

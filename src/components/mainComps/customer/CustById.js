@@ -26,6 +26,9 @@ function CustById() {
 
   return (
     <div className="cust-details">
+      
+      {/* check if error or one or multi obj*/}
+
       {error ? (
         <div className="error">{error}</div>
       ) : apiResponse && Array.isArray(apiResponse.Details) ? (

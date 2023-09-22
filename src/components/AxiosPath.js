@@ -46,8 +46,8 @@ function getCookie(name) {
 
 // creating Axios instance with custom headers
 const AxiosPath = axios.create({
-  baseURL: "https://avnersite.com/flight_tick_order_sys",  
-  //baseURL: "http://127.0.0.1:8000/flight_tick_order_sys",
+  //baseURL: "https://avnersite.com/flight_tick_order_sys",  
+  baseURL: "http://127.0.0.1:8000/flight_tick_order_sys",
   withCredentials: true, 
   xsrfCookieName: "csrftoken",
   xsrfHeaderName: "X-CSRFToken",

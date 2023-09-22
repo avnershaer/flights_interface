@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AxiosPath } from "../../AxiosPath";
 import FlightsTable from "../../tableComps/FlightsTable";
+import FlightDetails from "../../tableComps/FlightDetails";
 
 const GetFlightsTable = ({ handleOrderClick }) => {
   const [flights, setFlights] = useState([]);
@@ -22,8 +23,24 @@ const GetFlightsTable = ({ handleOrderClick }) => {
     // if error, render error details
     return <div className="error">Error: {error.message}</div>;
   }
+  
+  return (
+    <div className="cust-details">
+      
+      {/* check if error or one or multi obj*/}
 
-  return <FlightsTable flights={flights} handleOrderClick={handleOrderClick} />;
-};
- 
+      {error ? (
+        <div className="error">{error}</div>
+      ) : flights && Array.isArray(flights) ? (
+        <FlightsTable flights={flights} handleOrderClick={handleOrderClick} />
+      ) : flights && typeof flights.Details === 'object' ? (
+        <FlightDetails apiResponse={flights} />
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
+  );
+}
+
+
 export default GetFlightsTable;

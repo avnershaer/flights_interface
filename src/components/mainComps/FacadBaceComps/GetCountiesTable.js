@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AxiosPath } from "../../AxiosPath";
 import CountriesTable from "../../tableComps/CountriesTable";
+import CountryDetails from "../../tableComps/CountryDetails";
 
 
 const GetCountiesTable = () => {
@@ -24,9 +25,23 @@ const GetCountiesTable = () => {
     return <div className="error">Error: {error.message}</div>;
   }
 
-  return <CountriesTable countries={countries}  />;
-  }
+  return (
+    <div>
+      
+      {/* check if error or one or multi obj*/}
 
+      {error ? (
+        <div className="error">{error}</div>
+      ) : countries && Array.isArray(countries) ? (
+        <CountriesTable countries={countries} />
+      ) : countries && typeof countries === 'object' ? (
+        <CountryDetails apiResponse={countries} />
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
+  );
+}
 export default GetCountiesTable;
 
 
